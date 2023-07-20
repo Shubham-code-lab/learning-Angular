@@ -1,0 +1,32 @@
+<div class="container">
+
+  <!-- $event represent the data for native element it is event:Event for your custom element it is the data you pass -->
+
+  <!-- <app-cockpit
+    (serverCreated)="onServerAdded($event)"
+    (blueprintCreated)="onBlueprintAdded($event)"
+  ></app-cockpit> -->
+  <!-- OR using Alias -->
+  <app-cockpit
+    (servCreated)="onServerAdded($event)"
+    (bpCreated)="onBlueprintAdded($event)"
+  ></app-cockpit>
+  
+  
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- <app-server-element  *ngFor="let serverElement of serverElements" [element]="serverElement"></app-server-element> -->
+      <!-- OR -->
+      <button class="btn btn-primary" (click)="onChangeFirst()">Change first element</button>
+      <button class="btn btn-primary" (click)="onDestroyFirst()">Destroy first component</button>
+      <app-server-element  *ngFor="let serverElement of serverElements" [aliasNameElement]="serverElement" [name]="serverElement.name">
+        <!-- below content is send to the component where the ng-content derictives will get replaced by the below html code also we replaced the element with serverElement varibale name-->
+        <p #contentParagraph>
+          <strong *ngIf="serverElement.type === 'server'" style="color: red">{{ serverElement.content }}</strong>
+          <em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
+        </p>
+      </app-server-element>
+    </div>
+  </div>
+</div>

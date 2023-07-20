@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <input type="text" [(ngModel)]="filteredStatus">
+      <!-- our rendered data don't get updated when our servers array is a updated by default for performance but we can change that by adding pure:false -->
+      <button class="btn btn-primary" (click)="onAddServer()">Add Server</button>
+      <ul class="list-group">
+        <!-- for the below filter pipe value is servers array -->
+        <li
+          class="list-group-item"
+          *ngFor="let server of servers | filter:filteredStatus:'status'"
+          [ngClass]="getStatusClasses(server)">
+          <span
+            class="badge">
+            {{ server.status }}
+          </span>
+
+          <!-- custom pipe -->
+          <!-- <div><strong>{{ server.name | shorten }}</strong> | {{ server.instanceType }} | {{ server.started }}</div> -->
+
+          <!-- custom pipe with parameter if second argument is not provide it is set to undefined-->
+          <div><strong>{{ server.name | shorten:10 }}</strong> | {{ server.instanceType }} | {{ server.started }}</div>
+          
+          <div><strong>{{ server.name }}</strong> | {{ server.instanceType | uppercase }} | {{ server.started | date }}</div>
+          <!-- order of pipe matter it will not work when we first uppercase and then dates -->
+          <div><strong>{{ server.name }}</strong> | {{ server.instanceType | uppercase }} | {{ server.started | date: 'fullDate' | uppercase}}</div>
+        </li>
+      </ul>
+      <!-- pipe get updated even when any data changes hence it is costly for performance -->
+      <input type="text" (input)="updatePipeUpdate()">
+
+      <!-- async pipe -->
+      <!-- appStatus is promise that will be full-field after 2sec but angular don't know about it -->
+      <p>{{ appStatus }}</p>
+
+      <!-- by using async pipe it know promise and also work with observable it will subscribe to it after 2sec it update the render data   -->
+      <p>{{ appStatus | async }}</p>
+    </div>
+  </div>
+</div>

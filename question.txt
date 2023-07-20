@@ -1,0 +1,31 @@
+1. app module is consider as root module in main.ts because it is bootstrap. HOw can other module be included then?
+2. ng g c componentName create component directly in app folder .how  does it know the position and why not in other module it created?
+
+INSTALLING/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+npm install -g @angular/cli
+
+ng new my-app
+
+npm i --save bootstrap@5.3.0-alpha1  
+
+to let anuglar know about bootstrap we we need to modify angular.json file
+"styles": [
+            "node_modules/bootstrap/dist/css/bootstrap.min.css",         //add this line to add bootstrap to project 
+            "src/styles.css"
+        ],
+
+cd my-app
+ng serve --open
+
+ng g c componentName --skip-tests   //--skipTest true    //--spec false
+ng g c componentName/subcomponentName --skip-tests   //--skipTest true    //--spec false
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+model creating and inner component
+
+debuging main.bunndle
+source map is added to our bunndle by CLi while allow borwser to map javascript code to our typescript code they are remove in Production
+
+
+
+

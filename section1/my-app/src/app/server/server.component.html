@@ -1,0 +1,5 @@
+<div [ngStyle]="{backgroundColor: getColor(), border: '2px solid gray'}"
+    [ngClass]="{serverOnline: getServerStatus(), 'server-offline': !getServerStatus()}"
+>
+    {{ 'Just string' }} the server id is {{ serverId }} and server name is {{ serverName }} calling method {{ getServerDetail() }}
+</div>

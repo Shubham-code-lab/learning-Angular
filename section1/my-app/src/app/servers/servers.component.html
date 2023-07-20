@@ -1,0 +1,46 @@
+<!-- DATABINDING :- (Native Property and Event)-->
+<!-- string interpolation -->
+<!-- property/attribute binding  -->
+<!-- event bindind -->
+<!-- two way binding -->
+
+<!-- DIRECTIVES :- -->
+<!-- * represent as it is structural directive as it add or don't add element -->
+<!-- component,*ngIf -->
+
+<!-- ATTRIBUTE DIRECTIVES :- (Custom Property and Event)-->
+<!-- [ngStyle], [ngClass] -->
+
+
+
+<!-- we are not using disable attribute we dynamic binding to this native disaabled property of this element using square brancket [] -->
+<button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Add server</button>
+
+<p>{{serverCreationStatus}}</p>
+<!-- OR -->
+<p  [innerText]="serverCreationStatus"></p>
+
+<label for="using-event-binding">Using event Binding</label>
+<input id="using-event-binding" type="text" class="form-control" (input)="onUpdateServerName($event)">
+
+<label for="using-ng-model">Using two wa binding ngModel</label>
+<input id="using-ng-model" type="text" class="form-control" [(ngModel)]="serverName">
+
+<!-- using two if to generate if else -->
+<p *ngIf="serverName === ''">if {{serverName}}</p>
+<p *ngIf="serverName !== ''">!if server not created</p>
+
+<!-- Or using if else -->
+<p *ngIf="serverName === '';else noServer">if{{serverName}}</p>
+<ng-template #noServer>
+    <p>else noServer Server not created</p>
+</ng-template>
+
+
+<!-- *ngFor structural directives -->
+<app-server *ngFor="let server of serversArray"></app-server>
+
+
+<div *ngFor="let server of serversArray; let i = index">{{server}} {{i}}</div>
+
+
