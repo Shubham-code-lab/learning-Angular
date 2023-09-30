@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   //we can have any css selector id and pesudo class are not supported
   // selector: 'app-servers',
+  // selector: '.app-servers',   //<div class="app-server"></div>  //class selector
   //OR
   selector:'[app-servers]',   //css attribute selector
 

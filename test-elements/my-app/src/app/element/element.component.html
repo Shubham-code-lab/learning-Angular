@@ -1,0 +1,18 @@
+
+<ng-template #templateForCase1 let-temp1 let-item="item" let-name="name1">
+    <p *ngIf="item === 'case1'">This is content for case 1</p>
+    <p *ngIf="item === 'case2'">This is content for case 2</p>
+    <div>{{temp1}}</div>
+    <div>{{item}}</div>
+    <div>{{name}}</div>
+</ng-template>
+
+<div *ngFor="let item of ['case1', 'case2']">
+    <ng-container *ngTemplateOutlet="templateForCase1; context: { $implicit: 'default', item:item, name1: 'shubham' }"></ng-container>
+</div>
+
+
+<!-- menu toggle when checkbox is checked -->
+<!-- <input type="checkbox" [id]="'navigation-menu__item-'+currentNavigation.id" ngModel #subNavigationToggle hidden> -->
+<!-- <label [for]="'navigation-menu__item-'+currentNavigation.id"> -->
+<!-- <div class="navigation-menu__sub-menu" [ngClass]="{'hidden': subNavigationToggle.checked}"> -->
