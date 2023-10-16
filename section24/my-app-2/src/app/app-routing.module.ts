@@ -13,7 +13,7 @@ const routes: Route[] = [
     path: 'about',
     component: AboutComponent,
   },
-  {
+  {    //lazy loading work  as expected 
     path: 'dashboard',
     loadChildren: () =>
       import('./dashboard/dashboard-routing.module').then(
