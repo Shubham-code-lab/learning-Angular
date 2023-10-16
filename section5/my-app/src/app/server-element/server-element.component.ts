@@ -44,7 +44,7 @@ OnDestroy {
     console.log("Constructor is called run whenerver for each time this component is initilaize");
   }
   ngOnInit(): void {
-    console.log("ng OnInit run after Construcor is executed every time");
+    console.log("ng OnInit run after Constructor is executed every time");
     console.log("accessing DOM element", this.header.nativeElement.textContent);    //error
     console.log("accessing DOM element", this.contentPara.nativeElement.textContent);    //error
   }
@@ -52,7 +52,7 @@ OnDestroy {
     console.log("ngOnChanges called after contructor and later everytime when @Input data changed");
     console.log("ngOnChanges changes object contain old value and new value of changed value",chages);
   }
-  ngDoCheck(){
+  ngDoCheck(){//run two time in development mode    //ngDoCheck execute after ngOnChanges(if it execute) 
     console.log("ngDoCheck called after ngOnInit and later when angular check for any changes [i.e promise return, button click, or any changes]");
   }
   ngAfterContentInit(): void {

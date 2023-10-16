@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, tap,take, exhaustMap } from 'rxjs/operators';
 
 import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
 import { AuthService } from '../auth/auth.service';
+import { forkJoin } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
@@ -23,17 +24,10 @@ export class DataStorageService {
   }
 
   fetchRecipes() {
-    //take only one subject and then unsubscribe
-    //exhaustMap will wait for the first observer to completed and we will get value as the user is behavior subject first value will be null
-    //after the first observer cis completed it execute the second observer 
     
-    return this.authService.user.pipe(   //first observer [behavior subject user]
-      take(1),
-      exhaustMap(user => {
-        return this.http.get<Recipe[]>(    //second observer [Http request]
-          'https://learning-angular-956f9-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json'
-        )
-      }),
+    return this.http.get<Recipe[]>(
+      'https://learning-angular-956f9-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json'
+    ).pipe(
       map(recipes => {
         return recipes.map(recipe => {
           return {

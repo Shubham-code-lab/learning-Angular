@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
 import { User } from "./user.model";
+import { Router } from "@angular/router";
 
 export interface authResponseData {
     idToken	:string;
@@ -18,7 +19,9 @@ export class AuthService{
 
     user = new BehaviorSubject<User | null>(null);
 
-    constructor(private http: HttpClient){}
+    private tokenExpirationTimer: any = null;
+
+    constructor(private http: HttpClient, private router: Router){}
 
     signup(email:string, password:string){
         return this.http.post<authResponseData>(
@@ -57,6 +60,8 @@ export class AuthService{
         const expirationDate = new Date(new Date().getTime() + +expiresIn * 1000);
         const user = new User(email,localId, idToken, expirationDate);
         this.user.next(user);
+        this.autoLogout(expiresIn * 1000);    //set autologout when signin or signup
+        localStorage.setItem('userData', JSON.stringify(user));
     }
 
 
@@ -89,5 +94,41 @@ export class AuthService{
                 errorMessage = 'unKnown error occurred';
         }
         return throwError(() => new Error(errorMessage));
+    }
+
+    autoLogin(){   //call this method when app is loaded for  first time in app component onInit
+        const localStorageData = localStorage.getItem('userData');
+        if(!localStorageData)return;
+
+        const userData: {
+            email: string,
+            id: string,
+            _token: string,
+            _tokenExpirationDate: string
+        } = JSON.parse(localStorageData);
+        
+        const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+
+        if(loadedUser.token){
+            this.user.next(loadedUser);
+            const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+            this.autoLogout(expirationDuration);   //when user auto login though page refresh we need to set timeout again
+        }
+    }
+
+    logout(){
+        this.user.next(null);
+        this.router.navigate(['/auth'])
+        localStorage.removeItem('userData');
+        if(this.tokenExpirationTimer){
+            clearTimeout(this.tokenExpirationTimer);//clear time out if user manually logout then this will again logout because of setTimeout which might cause logout if was login again
+        }
+        this.tokenExpirationTimer = null;
+    }    
+
+    autoLogout(expirationDuration: number){
+        this.tokenExpirationTimer = setTimeout(()=>{
+            this.logout();
+        },expirationDuration)
     }
 }

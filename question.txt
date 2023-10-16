@@ -29,3 +29,7 @@ source map is added to our bunndle by CLi while allow borwser to map javascript 
 
 
 
+we declare the component in the module 
+we no need to export/import it 
+we only export it when we need that component in other module
+we only import module and get access to it component which are exported 
