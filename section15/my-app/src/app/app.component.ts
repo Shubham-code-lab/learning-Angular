@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
       "userData": new FormGroup({          //nesting formGroup
         // 'username': new FormControl(null, Validators.required),
         'username': new FormControl(null, [Validators.required,this.validateForbiddenName.bind(this)]),
-        'email': new FormControl(null, [Validators.required, Validators.email],
+        'email': new FormControl(null, `[Validators.required, Validators.email]`,
           // this.forbiddenEmailsValidator,
            this.forbiddenEmails,
           // this.forbiddenEmails2,
