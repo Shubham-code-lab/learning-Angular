@@ -1,54 +1,5 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <!-- angular auto detect form tag and create form for us but we want to override it and replace with our formGroup -->
-      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <div formGroupName="userData">
-          <div class="form-group">
-            <label for="username">Username</label>
-            <!-- to tell which control connected to which input template -->
-            <input
-              type="text"
-              id="username"
-              formControlName="username"
-              class="form-control">
-              <!-- signupForm.get('') accept control name or path to the control we just have one level of nesting object -->
-              <span *ngIf="!signupForm.get('userData.username')?.valid && signupForm.get('userData.username')?.touched" class="help-block">
-                <span *ngIf="isValidName()">This name is invalid</span>
-                <span *ngIf="isNameRequired()">This field is required</span>
-              </span>              
-          </div>
-          <!-- [formControlName]="'username'" OR formControlName="username"-->
-          <div class="form-group">
-            <label for="email">email</label>
-            <input
-              type="text"
-              id="email"
-              formControlName="email"
-              class="form-control">
-              <span *ngIf="!signupForm.get('userData.email')?.valid && signupForm.get('userData.email')?.touched" class="help-block">Please enter the valid email</span>
-          </div>
-        </div>
-        <div class="radio" *ngFor="let gender of genders">
-          <label>
-            <input
-              type="radio"
-              formControlName="gender"
-              [value]="gender">{{ gender }}
-          </label>
-        </div>
-        <!-- formArray -->
-        <div formArrayName="hobbies">
-          <h4>Your Hobbies</h4>
-          <button class="btn btn-default" type="button" (click)="onAddHobby()">Add Hobby</button>
-          <div class="form-group" *ngFor="let hobbyControl of getHobbies(); let i = index">
-            <input type="text" class="form-control" [formControlName]="i">
-          </div>
-        </div>
-
-        <span *ngIf="!signupForm.valid && signupForm.touched" class="help-block">Please enter the valid data</span>
-        <button class="btn btn-primary" type="submit">Submit</button>
-      </form>
-    </div>
-  </div>
+<div class="nav-container">
+  <span [routerLink]="['/template']">Template Driven form</span>
+  <span [routerLink]="['/reactive']">Reactive form</span>
 </div>
+<router-outlet></router-outlet>

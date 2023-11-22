@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <!-- formModule is required for the template driven form -->
+
+        <!-- form element is the selector for this directive built in the angular which will give access to this form object -->
+        <!-- ngForm will give use access to that form object -->
+        <form (ngSubmit)="onSubmit(formElement)" #formElement="ngForm">
+          <div id="user-data">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <!-- ngModel directive from formModule -->
+              <!-- this control is now register as the javascript representation of the form -->
+              <input type="text" id="username" class="form-control" ngModel name="username" required>
+            </div>
+            <button class="btn btn-default" type="button">Suggest an Username</button>
+            <div class="form-group">
+              <label for="email">Mail</label>
+              <!-- we added required and email directive to add validator to the field -->
+              <input type="email" id="email" class="form-control" ngModel name="email" required email>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="secret">Secret Questions</label>
+            <select id="secret" class="form-control" ngModel name="secret">
+              <option value="pet">Your first Pet?</option>
+              <option value="teacher">Your first teacher?</option>
+            </select>
+          </div>
+          <!-- button of type submit in the form element will trigger javascript submit event -->
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

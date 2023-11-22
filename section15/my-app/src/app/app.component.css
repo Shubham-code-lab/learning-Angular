@@ -1,8 +1,10 @@
-.container {
-  margin-top: 30px;
-}
+.nav-container{
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
 
-
-input.ng-invalid.ng-touched{
-  border: 1px solid red;
+  span{
+    background-color: blanchedalmond;
+    color: gray;
+  }
 }
