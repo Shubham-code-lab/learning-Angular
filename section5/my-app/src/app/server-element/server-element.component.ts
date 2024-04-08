@@ -22,7 +22,7 @@ import {
   styleUrls: ['./server-element.component.css'],
   encapsulation: ViewEncapsulation.Emulated  //default css style are scoped  i.e:- p{css} only for this component p[ngcontnet_gap_2] as it attach this attibute to the element and only aply to those
   // encapsulation: ViewEncapsulation.None  //global css applied  i.e:- p{css}  for all component p tag get the css
-  // encapsulation: ViewEncapsulation.Native  //shadow dom behaviour
+  // encapsulation: ViewEncapsulation.//Native //ShadowDom  //shadow dom behaviour
 })
 export class ServerElementComponent implements 
 OnInit,
