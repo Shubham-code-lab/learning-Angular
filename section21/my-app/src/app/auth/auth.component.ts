@@ -19,15 +19,15 @@ import { PlaceholderDirective } from '../shared/placeholder/placeholder.directiv
 export class AuthComponent implements OnDestroy {
   isLoginMode = true;
   isLoading = false;
-  error: string = null;
-  @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
+  error: string = '';
+  @ViewChild(PlaceholderDirective, { static: false }) alertHost?: PlaceholderDirective;
 
-  private closeSub: Subscription;
+  private closeSub!: Subscription;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private componentFactoryResolver: ComponentFactoryResolver
+    // private componentFactoryResolver: ComponentFactoryResolver
   ) {}
 
   onSwitchMode() {
@@ -69,7 +69,7 @@ export class AuthComponent implements OnDestroy {
   }
 
   onHandleError() {
-    this.error = null;
+    this.error = '';
   }
 
   ngOnDestroy() {
@@ -78,18 +78,38 @@ export class AuthComponent implements OnDestroy {
     }
   }
 
+  // private showErrorAlert(message: string) {
+  //   if(!this.alertHost)return;
+
+  //   // const alertCmp = new AlertComponent();
+  //   const alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(
+  //     AlertComponent
+  //   );
+  //   const hostViewContainerRef = this.alertHost.viewContainerRef;
+  //   hostViewContainerRef.clear();
+
+  //   const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);
+
+  //   componentRef.instance.message = message;
+  //   this.closeSub = componentRef.instance.close.subscribe(() => {
+  //     console.log("closing dynamic component");
+  //     this.closeSub.unsubscribe();
+  //     hostViewContainerRef.clear();
+  //   });
+  // }
+
   private showErrorAlert(message: string) {
-    // const alertCmp = new AlertComponent();
-    const alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(
-      AlertComponent
-    );
+    if(!this.alertHost)return;
+
     const hostViewContainerRef = this.alertHost.viewContainerRef;
     hostViewContainerRef.clear();
+    
 
-    const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);
+    const componentRef = hostViewContainerRef.createComponent(AlertComponent);
 
     componentRef.instance.message = message;
     this.closeSub = componentRef.instance.close.subscribe(() => {
+      console.log("closing dynamic component");
       this.closeSub.unsubscribe();
       hostViewContainerRef.clear();
     });

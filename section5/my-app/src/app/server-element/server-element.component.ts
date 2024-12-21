@@ -37,7 +37,7 @@ OnDestroy {
   //OR
   @Input("aliasNameElement") element!: {name:string, content:string, type:string};     //decorator that allow parent component to bind to this property
   @Input() name!:string;
-  @ViewChild("heading", { static: false }) header!:ElementRef;   //when we can access see below
+  @ViewChild("heading", { static: false }) header!:ElementRef;   //when we can access see below   //static is true we will get value in ngOnInit keep it true if you know that element is not depend upon structural directives
   @ContentChild('contentParagraph', {static: false}) contentPara!: ElementRef;     //where we can access as it is content project in this component by parent
 
   constructor(){
@@ -52,7 +52,7 @@ OnDestroy {
     console.log("ngOnChanges called after contructor and later everytime when @Input data changed");
     console.log("ngOnChanges changes object contain old value and new value of changed value",chages);
   }
-  ngDoCheck(){//run two time in development mode    //ngDoCheck execute after ngOnChanges(if it execute) 
+  ngDoCheck(){//run two time in development mode    //ngDoCheck execute after ngOnChanges(if it execute)  //will execute after change detection cycle  //so don't write heavy code in this
     console.log("ngDoCheck called after ngOnInit and later when angular check for any changes [i.e promise return, button click, or any changes]");
   }
   ngAfterContentInit(): void {

@@ -10,8 +10,8 @@ import { UnlessDirective } from './unless.directive';
 @NgModule({
   declarations: [
     AppComponent,
-    BasicHighlightDirective,
-    UnlessDirective
+    BasicHighlightDirective,   //informing angular about directive
+    UnlessDirective             //informing angular about directive
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  //we can have any css selector id and pesudo class are not supported
+  //we can have any css selector but id and pesudo class are not supported
   // selector: 'app-servers',
   // selector: '.app-servers',   //<div class="app-server"></div>  //class selector
   //OR
@@ -47,6 +47,10 @@ export class ServersComponent {
     if(event.currentTarget instanceof HTMLInputElement){
       this.serverName = event.currentTarget.value;
     }
+  }
+
+  trackByFn(index: number, item: any): number {
+    return item; //item.id // Assuming each item in your list has a unique 'id' property
   }
 
   ngOnInit(){

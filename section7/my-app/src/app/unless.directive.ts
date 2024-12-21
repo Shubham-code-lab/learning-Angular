@@ -6,7 +6,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from "@angular/core";
 })
 
 export class UnlessDirective{
-    @Input() set appUnless(condition: boolean) {   //appunless same name used as selector
+    @Input() set appUnless(condition: boolean) {   //appunless same name used as selector as we assigning value directly to selector name
         if(!condition){
             this.vcRef.createEmbeddedView(this.templateRef);  //create view in this view contianer
         }

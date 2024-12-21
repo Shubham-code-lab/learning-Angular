@@ -31,9 +31,15 @@
                 </li>
             </div>
         </ul>
+
+        <!-- structural directive behind the scene conversion to following -->
+        <p *ngIf="onlyOdd">Only odd</p>
+        <!-- converted to  -->
         <ng-template [ngIf]="onlyOdd">
           <p>Only odd</p>
         </ng-template>
+        
+        
         <!-- attribut directive with not [] square bracket -->
         <!-- <p appBasicHighlight>Style me with basic directive</p> -->
 

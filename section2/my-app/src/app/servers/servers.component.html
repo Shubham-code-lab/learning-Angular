@@ -5,10 +5,11 @@
 <!-- two way binding -->
 
 <!-- DIRECTIVES :- -->
-<!-- * represent as it is structural directive as it add or don't add element in DOM-->
+<!-- component are directive but with template directive are instruction in DOM -->
+<!-- * represent as it is structural directive as it add or don't add element in DOM it changes structure of DOM-->
 <!-- component,*ngIf -->
 
-<!-- ATTRIBUTE DIRECTIVES :- (Custom Property and Event)-->
+<!-- ATTRIBUTE DIRECTIVES :- (Custom Property and Event) -->
 <!-- this changes the attribute they are placed on -->
 <!-- [] here represent property binding, which is used to bind to the property of the directive called ngStyle. Property binding is a type of attribute directive. -->
 <!-- [ngStyle], [ngClass] -->
@@ -43,6 +44,13 @@
 <app-server *ngFor="let server of serversArray"></app-server>
 
 
-<div *ngFor="let server of serversArray; let i = index">{{server}} {{i}}</div>
+<div *ngFor="let server of serversArray; let i = index; let odd = odd; let even = even; let isLast = last; let isFirst = first; trackBy: trackByFn">
+    {{server}} - Index: {{i}} - 
+    <span *ngIf="isFirst">First</span>
+    <span *ngIf="isLast">Last</span>
+    <span *ngIf="odd">Odd</span>
+    <span *ngIf="even">Even</span>
+</div>
+
 
 
