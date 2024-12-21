@@ -444,6 +444,52 @@ https://dev.console.media.argoid.com/api/ottdev/v1/schedules/timezones
 Request Method:
 GET
 
+
+
+///
+
+
+
+Angular tips
+
+Use closures when pushing to an array to control when you want the value changes of that control to trigger the value changes of another control in the same value. Get the control closure before pushing it to the array and store it in a variable. Use the value change on its child control.
+
+Also, you can't patch the value of a FormArray directly. You have to loop through it and handle each control or group set it and push one by one.
+
+you can't use ngModule in nested form tag i.e:- formControlName, formGorup
+
+when you save data in service in order to use it in redirect on other page that data will not be available when user reload page so send it though params or dynamic url
+
+
+if (val === 'DATE_RANGE') {
+
+this.scheduleFor.get('startDate')?.addValidators(Validators.required);
+
+this.scheduleFor.get('endDate')?.addValidators(Validators.required);
+
+} else {
+
+console.log("trigger");
+
+this.scheduleFor.get('startDate')?.removeValidators(Validators.required);
+
+this.scheduleFor.get('endDate')?.removeValidators(Validators.required);
+
+// this.scheduleFor.get('startDate')?.clearValidators();
+
+// this.scheduleFor.get('endDate')?.clearValidators();
+
+this.scheduleFor.get('startDate')?.updateValueAndValidity();
+
+this.scheduleFor.get('endDate')?.updateValueAndValidity();
+
+// this.ruleForm.updateValueAndValidity();
+
+console.log(this.ruleForm);
+
+}
+
+
 Status Code:
 404 Not Found
 
