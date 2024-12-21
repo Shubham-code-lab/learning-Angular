@@ -414,6 +414,37 @@ const totalSeconds = timeZone.gmtOffset;
 
 
 ///
+https://github.com/angular-university/angular-material-course
 
+ng serve --configuration=production
+
+
+
+```
+.argoid-collection_products.grid-pattern--3 {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+}
+.argoid-collection_products.grid-pattern--2 {
+  grid-template-columns: repeat(2,minmax(0,1fr));
+}
+```
+
+//create component inside a module
+ng g c component --module moduleName.ts
+
+//create routign along with module
+
+
+ @Akshaya Dongre ,
+which domain environment to use getting 404 error
+
+Request URL:
+https://dev.console.media.argoid.com/api/ottdev/v1/schedules/timezones
+
+Request Method:
+GET
+
+Status Code:
+404 Not Found
 
 
