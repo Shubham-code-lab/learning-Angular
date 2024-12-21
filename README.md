@@ -1,3 +1,4 @@
+installation and first step
 
 Install the CLI using the npmpackage manager:
 npm install -g @angular/cli
